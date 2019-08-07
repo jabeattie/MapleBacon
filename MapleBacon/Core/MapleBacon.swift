@@ -104,7 +104,7 @@ public final class MapleBacon {
     let key = url.absoluteString
     var token: UUID?
     cache.retrieveData(forKey: key, transformerId: transformer?.identifier) { [weak self] data, cacheType in
-      guard let data = data else {
+      guard let data = data, let _ = UIImage(data: data) else {
         let downloadToken = self?.downloader.download(url, progress: progress, completion: { data in
           guard let self = self, let data = data else {
             completion?(nil, cacheType)
